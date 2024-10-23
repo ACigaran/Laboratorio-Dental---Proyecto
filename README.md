@@ -1,6 +1,6 @@
+
 ## Programa de control para un Laboratorio Dental
 Se debe crear un programa en c# que se adapte a un dispositivo movil
-
 
 ### Conceptos iniciales
 
@@ -9,6 +9,10 @@ Se debe crear un programa en c# que se adapte a un dispositivo movil
 - Historial clinico: Cada paciente tendra un historial clinico, dicho historial dara a conocer mediante una
 imagen cuantos dientes tiene y cuantos dientes le faltan en funcion del orden numerico de los mismos, trabajos 
 que el paciente ya se realizo en la boca (protesis, cromos, reparaciones)
+
+| Clase | Metodo |
+|-------|--------|
+|Paciente|agregar|
 
 Lista de trabajos que hace el consultorio (string NombreTrabajo, int precioTrabajo)
 
