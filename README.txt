@@ -1,8 +1,8 @@
 ## Programa de control para un Laboratorio Dental
-----
-### Conceptos iniciales
-
 Se debe crear un programa en c# que se adapte a un dispositivo movil
+
+
+### Conceptos iniciales
 
 ### Parametos basicos a considerar:
 - Paciente: Todos los pacientes tienen (Nombre, Apellido, Dirección, lista de fechas de atención, saldo)
