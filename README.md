@@ -18,3 +18,4 @@ agenda sobre trabajos activos y finalizados.
 | Adelanto Pago-Saldo | Conoce las fechas que el paciente se atendio y puede restar una parte o el total del saldo del paciente |
 | Trabajos Activos | Conoce todos los pacientes con trabajos activos, en que fecha inicio el trabajo, el valor total del trabajo, cuanto dinero entrego y cuanto dinero falta para terminar el saldo |
 | Balance mensual | (Similar a trabajos activos) Total del dinero que ingreso al laboratorio en el mes, total del dinero faltante para terminar los trabajos, estimativo total en funcion de cuantos trabajos se realizaron en el mes |
+| Cambio Fecha | Un paciente puede cancelar una fecha de trabajo y cambiarla para una fecha futura |
