@@ -9,6 +9,7 @@ agenda sobre trabajos activos y finalizados.
 ### Parametos basicos a considerar:
 
 - Pacientes: Tienen un Nombre, Apellido, Dirección del hogar, lista de fechas de atención (con los trabajos realizados en esa fecha), saldo del trabajo activo
+- Consultorios: Tiene un Nombre, Direccion de local, lista de trabajos realizados, saldo activo, lista propia de precios
 
 | Metodos y clases a implementar | Responsabilidad |
 ------------------------|-----------------|
