@@ -1,0 +1,50 @@
+html {
+    font-family: "Playwrite IT Moderna", cursive;
+}
+
+article {
+    background-image: url("../Imagenes/Olas_Fondo.png");
+    background-color: lightcoral;
+    transition: box-shadow 0.3s ease;
+    width: 300px;
+    height: 360px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px auto;
+}
+
+article:hover {
+    box-shadow: 0 0 8px rgb(0, 0, 0);
+}
+
+.imagen {
+    margin-top: 25px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    float: left;
+}
+
+p {
+    margin-left: 100px;
+}
+
+div {
+    padding: 5px;
+}
+
+button {
+    align-items: center;
+    margin: 1px auto;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: white;
+    font-family: "Playwrite IT Moderna", cursive;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: thistle;
+}
