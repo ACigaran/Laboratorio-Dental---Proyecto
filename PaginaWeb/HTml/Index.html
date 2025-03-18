@@ -9,17 +9,21 @@
 </head>
 <body>
     <article class="contenedor">
+        <a onclick="deslogearse()"><img class="loginButton" src="../Imagenes/Login_Activo.png"></a>
+        <a onclick="irAlLogin()"><img class="loginButton" src="../Imagenes/Login.png"></a>
         <img style="display: flex;" class="imagen" src="../Imagenes/Icono.png" width="400">
         <h1>Maria Sonrisa</h1>
         <h3>Mecanica Dental</h3>
         <p>Tec. Valeria Silveira</p>
-        <div>
-            <button>Lista de Trabajos</button> <!-- Muestra todos los trabajos y precios --> <!-- Existe una lista de precios para Pacientes y otra con los mismos trabajos pero otros precios para consultorios -->
+        <div class="todasLasOpciones">
+            <a onclick="comprobarUsuario()"><button>Lista de Trabajos</button></a> <!-- Muestra todos los trabajos y precios --> <!-- Existe una lista de precios para Pacientes y otra con los mismos trabajos pero otros precios para consultorios -->
             <button>Pacientes</button> <!-- ver su historial clinico --> <!-- asignarle o cancelarle un trabajo del laboratorio, saldo y fecha de inicio --> <!-- conocer las fechas que el paciente fue, marcar si pago o adelanto dinero y ver su saldo pendiente -->
             <button>Consultorios</button> <!-- ver todos los consultorios a los que se les hace trabajos, agregar consultorios --> <!-- funcionaria como los pacientes pero usan una Lista de Trabajo dferente -->
             <button>Trabajos Activos</button> <!-- lista de todos los trabajos activos del laboratorio, con fecha de inicio, valor total del mismo y si se entrego algun dinero o no -->
+            <button>Gastos en Material</button> <!-- lista de todos los gastos mensuales en materiales de trabajo, como yeso, dientes, cera, etc -->
             <button>Balance Mensual</button> <!-- total del dinero que ingreso en el laboratorio ese mes, total de dinero que falta ingresar y cantidad de trabajos realizados -->
         </div>
     </article>
 </body>
+<script src="../Js/script.js"></script>
 </html>

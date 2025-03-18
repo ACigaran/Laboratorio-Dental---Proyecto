@@ -6,8 +6,9 @@ article {
     background-image: url("../Imagenes/Olas_Fondo.png");
     background-color: lightcoral;
     transition: box-shadow 0.3s ease;
-    width: 300px;
-    height: 390px;
+    width: fit-content;
+    /* width: 300px; */
+    /* height: 420px; */
     text-align: center;
     border-radius: 10px;
     padding: 20px;
@@ -30,12 +31,13 @@ p {
     margin-left: 100px;
 }
 
-div {
+.todasLasOpciones {
     padding: 5px;
 }
 
 button {
     background-color: rgb(255, 252, 241);
+    display: block;
     font-weight: bold;
     align-items: center;
     margin: 1px auto;
@@ -53,4 +55,11 @@ button:hover {
 
 button:active {
     background-color: thistle;
+}
+
+.loginButton {
+    width: 25px;
+    display: flex;
+    float: right;
+    cursor: pointer;
 }

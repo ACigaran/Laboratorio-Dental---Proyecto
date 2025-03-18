@@ -1,0 +1,55 @@
+html {
+    font-family: "Playwrite IT Moderna", cursive;
+}
+
+body {
+    text-align: center;
+}
+
+table {
+    background-color: rgb(214, 210, 248);
+    border-collapse: collapse;
+    box-shadow: gray 0 0 5px;
+    width: fit-content;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+th {
+    /* background-color: rgb(188, 158, 207); */
+    background-color: rgb(223, 169, 169);
+}
+
+th, td {
+    border: solid 1px floralwhite;
+    padding: 5px;
+}
+
+th:hover, td:hover{
+    background-color: #efefef;
+}
+
+th:active, td:active{
+    background-color: #bcbcbc;
+}
+
+input {
+    width: 80%;
+}
+
+.nombre_trabajos {
+    /* background-color: rgb(159, 100, 237); */
+    background-color: lightcoral;
+}
+
+h2 {
+    background-color: red;
+    margin: 2px auto;
+    width: 37%;
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+}
+
+table, .nombre_trabajos, th, h2{
+    background-image: url('../Imagenes/Olas_Fondo.png');
+}

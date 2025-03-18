@@ -1,0 +1,38 @@
+body {
+    text-align: center;
+}
+
+div {
+    transition: box-shadow 0.3s ease;
+    background-image: url('../Imagenes/Olas_Fondo.png');
+    background-color: lightblue;
+    width: fit-content;
+    height: auto;
+    margin: 20px auto;
+    padding: 50px;
+    border-radius: 8px;
+}
+
+input {
+    width: fit-content;
+    padding: 5px;
+    display: block;
+    margin: 15px;
+}
+
+button {
+    padding: 5px;
+    width: fit-content;
+}
+
+h3 {
+    margin: 0 auto;
+}
+
+div:hover {
+    box-shadow:  0 0.1rem 0.4rem rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    cursor: pointer;
+}
