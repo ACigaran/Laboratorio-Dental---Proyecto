@@ -32,7 +32,6 @@ article:hover {
 
 /* DIV CON BOTONES */
 .todasLasOpciones {
-    /* margin-top: 15%; */
     margin: center;
 }
 
@@ -72,7 +71,6 @@ button:active {
 
 .textos {
     text-align: center;
-    /* margin-right: 10%; */
     display: flex;
     flex-direction: column;
     font-size: 1.5em;
