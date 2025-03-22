@@ -15,6 +15,7 @@
             <a onclick="irAlLogin()"><img class="loginButton" src="../Imagenes/Login.png"></a>
             <img class="imagen" src="../Imagenes/Icono.png">
         </div>
+        <span id="cartelDeAviso"></span>
         <div>
             <h2 class="textos">Maria Sonrisa</h2>
             <h3 class="textos">Mecanica Dental</h3>
@@ -22,7 +23,7 @@
         </div>
         <div class="todasLasOpciones">
             <a onclick="comprobarUsuario()"><button>Lista de Trabajos</button></a> <!-- Muestra todos los trabajos y precios --> <!-- Existe una lista de precios para Pacientes y otra con los mismos trabajos pero otros precios para consultorios -->
-            <button>Pacientes</button> <!-- ver su historial clinico --> <!-- asignarle o cancelarle un trabajo del laboratorio, saldo y fecha de inicio --> <!-- conocer las fechas que el paciente fue, marcar si pago o adelanto dinero y ver su saldo pendiente -->
+            <button onclick="irPacientes()">Pacientes</button> <!-- ver su historial clinico --> <!-- asignarle o cancelarle un trabajo del laboratorio, saldo y fecha de inicio --> <!-- conocer las fechas que el paciente fue, marcar si pago o adelanto dinero y ver su saldo pendiente -->
             <button>Consultorios</button> <!-- ver todos los consultorios a los que se les hace trabajos, agregar consultorios --> <!-- funcionaria como los pacientes pero usan una Lista de Trabajo dferente -->
             <button>Trabajos Activos</button> <!-- lista de todos los trabajos activos del laboratorio, con fecha de inicio, valor total del mismo y si se entrego algun dinero o no -->
             <button>Gastos en Material</button> <!-- lista de todos los gastos mensuales en materiales de trabajo, como yeso, dientes, cera, etc -->

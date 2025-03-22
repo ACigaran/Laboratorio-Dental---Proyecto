@@ -1,9 +1,13 @@
 let usuarioIngresado = localStorage.getItem("usuario");
-let cuadroAlertas = document.getElementsByClassName('alertas');
-
+let avisoCuadro = document.getElementById('cartelDeAviso');
 
 function irAlLogin() {
     if (usuarioIngresado !== null) {
+        // avisoCuadro.innerHTML = `
+        //     <div width="80vh" height="80vh" position="fixed" z-index=" 1000" style="background-color: brown;">
+        //         <h1> !Usted ya esta logeado! </h1>
+        //     </div>
+        // `;
         alert("¡Usted ya se ingreso!");
     } else {
         window.location.href="../Rutas/Login.html"
@@ -26,4 +30,8 @@ function comprobarUsuario() {
     } else {
         alert('¡SOLO USUARIOS PUEDEN ACCEDER!')
     }
+}
+
+function irPacientes() {
+    window.location.href="../Rutas/Pacientes.html";
 }

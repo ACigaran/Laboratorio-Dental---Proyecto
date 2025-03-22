@@ -25,6 +25,15 @@ let reparaciones5 = new Trabajo('Placa de contención', 'Reparaciones', 2000, 22
 let reparaciones6 = new Trabajo('Placas de blancamiento (inf y sup)', 'Reparaciones', 2000, 2200);
 let reparaciones7 = new Trabajo('Tratam. Blanc. (placas + jeringas)', 'Reparaciones', 4000, 4400);
 
+// let trabajosPacientes = [
+//     acrilico1, acrilico2, acrilico3,
+//     acrilico4, acrilico5, acrilico6,
+//     cromo1, cromo2, cromo3, reparaciones1,
+//     reparaciones2, reparaciones3, 
+//     reparaciones4, reparaciones5,
+//     reparaciones6, reparaciones7,
+// ];
+
 // =================================
 // ====================== > ACRILICO
 // =================================
@@ -51,29 +60,29 @@ for (i = 1; i < 7; i++) {
 for (i = 1; i < 13; i++) {
     let temporalPrecioA = document.getElementById('HolderAcrilico'+i);
     if (i == 1) {
-        temporalPrecioA.placeholder = acrilico1.precioContado;
+        temporalPrecioA.value = acrilico1.precioContado;
     } if (i == 2) {
-        temporalPrecioA.placeholder = acrilico1.precioMercadoPago;
+        temporalPrecioA.value = acrilico1.precioMercadoPago;
     } if (i == 3) {
-        temporalPrecioA.placeholder = acrilico2.precioContado;
+        temporalPrecioA.value = acrilico2.precioContado;
     } if (i == 4) {
-        temporalPrecioA.placeholder = acrilico2.precioMercadoPago;
+        temporalPrecioA.value = acrilico2.precioMercadoPago;
     } if (i == 5) {
-        temporalPrecioA.placeholder = acrilico3.precioContado;
+        temporalPrecioA.value = acrilico3.precioContado;
     } if (i == 6) {
-        temporalPrecioA.placeholder = acrilico3.precioMercadoPago;
+        temporalPrecioA.value = acrilico3.precioMercadoPago;
     } if (i == 7) {
-        temporalPrecioA.placeholder = acrilico4.precioContado;
+        temporalPrecioA.value = acrilico4.precioContado;
     } if (i == 8) {
-        temporalPrecioA.placeholder = acrilico4.precioMercadoPago;
+        temporalPrecioA.value = acrilico4.precioMercadoPago;
     } if (i == 9) {
-        temporalPrecioA.placeholder = acrilico5.precioContado;
+        temporalPrecioA.value = acrilico5.precioContado;
     } if (i == 10) {
-        temporalPrecioA.placeholder = acrilico5.precioMercadoPago;
+        temporalPrecioA.value = acrilico5.precioMercadoPago;
     } if (i == 11) {
-        temporalPrecioA.placeholder = acrilico6.precioContado;
+        temporalPrecioA.value = acrilico6.precioContado;
     } if (i == 12) {
-        temporalPrecioA.placeholder = acrilico6.precioMercadoPago;
+        temporalPrecioA.value = acrilico6.precioMercadoPago;
     }
 }
 
@@ -97,17 +106,17 @@ for (i = 1; i < 4; i++) {
 for (i = 1; i < 7; i++) {
     let temporalPrecioC = document.getElementById('HolderCromo'+i);
     if (i == 1) {
-        temporalPrecioC.placeholder = cromo1.precioContado;
+        temporalPrecioC.value = cromo1.precioContado;
     } if (i == 2) {
-        temporalPrecioC.placeholder = cromo1.precioMercadoPago;
+        temporalPrecioC.value = cromo1.precioMercadoPago;
     } if (i == 3) {
-        temporalPrecioC.placeholder = cromo2.precioContado;
+        temporalPrecioC.value = cromo2.precioContado;
     } if (i == 4) {
-        temporalPrecioC.placeholder = cromo2.precioMercadoPago;
+        temporalPrecioC.value = cromo2.precioMercadoPago;
     } if (i == 5) {
-        temporalPrecioC.placeholder = cromo3.precioContado;
+        temporalPrecioC.value = cromo3.precioContado;
     } if (i == 6) {
-        temporalPrecioC.placeholder = cromo3.precioMercadoPago;
+        temporalPrecioC.value = cromo3.precioMercadoPago;
     }
 }
 
@@ -139,24 +148,33 @@ for (i = 1; i < 8; i++) {
 for (i = 1; i < 11; i++) {
     let temporalPrecioR = document.getElementById('HolderReparaciones'+i);
     if (i == 1) {
-        temporalPrecioR.placeholder = reparaciones1.precioContado;
+        temporalPrecioR.value = reparaciones1.precioContado;
     } if (i == 2) {
-        temporalPrecioR.placeholder = reparaciones2.precioContado;
+        temporalPrecioR.value = reparaciones2.precioContado;
     } if (i == 3) {
-        temporalPrecioR.placeholder = reparaciones3.precioContado;
+        temporalPrecioR.value = reparaciones3.precioContado;
     } if (i == 4) {
-        temporalPrecioR.placeholder = reparaciones4.precioContado;
+        temporalPrecioR.value = reparaciones4.precioContado;
     } if (i == 5) {
-        temporalPrecioR.placeholder = reparaciones5.precioContado;
+        temporalPrecioR.value = reparaciones5.precioContado;
     } if (i == 6) {
-        temporalPrecioR.placeholder = reparaciones5.precioMercadoPago;
+        temporalPrecioR.value = reparaciones5.precioMercadoPago;
     } if (i == 7) {
-        temporalPrecioR.placeholder = reparaciones6.precioContado;
+        temporalPrecioR.value = reparaciones6.precioContado;
     } if (i == 8) {
-        temporalPrecioR.placeholder = reparaciones6.precioMercadoPago;
+        temporalPrecioR.value = reparaciones6.precioMercadoPago;
     } if (i == 9) {
-        temporalPrecioR.placeholder = reparaciones7.precioContado;
+        temporalPrecioR.value = reparaciones7.precioContado;
     } if (i == 10) {
-        temporalPrecioR.placeholder = reparaciones7.precioMercadoPago;
+        temporalPrecioR.value = reparaciones7.precioMercadoPago;
     }
 }
+
+// TOMAR EL VALOR QUE ESTA EN EL INPUT 
+let escritoInput = document.getElementById('HolderReparaciones10');
+
+function tomarInput() {
+    console.log(escritoInput.value);
+}
+
+// TENDRIA QUE VER SI EL INPUT CAMBIO, COMPARAR EL VALOR ACTUAL CON EL QUE ESTA EN EL OBJETO Y SI CAMBIO  ASIGNARLE EL NUEVO VALOR
