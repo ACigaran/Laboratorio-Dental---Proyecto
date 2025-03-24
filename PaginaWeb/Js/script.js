@@ -24,14 +24,50 @@ function deslogearse() {
     }
 }
 
-function comprobarUsuario() {
+function irListaTrabajos() {
     if (usuarioIngresado !== null) {
-        window.location.href="../Rutas/Trabajos.html"
+        window.location.href="../Rutas/SeleccionarLista/PublicoObjetivo.html"
     } else {
         alert('¡SOLO USUARIOS PUEDEN ACCEDER!')
     }
 }
 
 function irPacientes() {
-    window.location.href="../Rutas/Pacientes.html";
+    if (usuarioIngresado !== null) {
+        window.location.href="../Rutas/Pacientes.html";
+    } else {
+        alert('SOLO USUARIOS PUEDEN ACCEDER')
+    }
+}
+
+function irConsultorios() {
+    if (usuarioIngresado !== null) {
+        window.location.href="../Rutas/Consultorios.html";
+    } else {
+        alert('SOLO USUARIOS PUEDEN ACCEDER')
+    }
+}
+
+function irTrabajosActivos() {
+    if (usuarioIngresado !== null) {
+        window.location.href="../Rutas/TrabajosActivos.html"    
+    } else {
+        alert('SOLO USUARIOS PUEDEN ACCEDER')
+    }
+}
+
+function irGastosMaterial() {
+    if (usuarioIngresado !== null) {
+        window.location.href="../Rutas/GastosMaterial.html"
+    } else {
+        alert('SOLO USUARIOS PUEDEN ACCEDER')
+    }
+}
+
+function irBalanceMensual() {
+    if (usuarioIngresado !== null) {
+        window.location.href="../Rutas/BalanceMensual.html"
+    } else {
+        alert('SOLO USUARIOS PUEDEN ACCEDER')
+    }
 }

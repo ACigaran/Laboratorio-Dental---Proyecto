@@ -12,4 +12,17 @@ conexion.connect(function(err){
     }
 });
 
+let nombreTrabajo = 'SELECT Nombre FROM TrabajosConsultorios;';
+let precioTrabajo = 'SELECT PrecioContado FROM TrabajosConsultorios;';
+
+
+conexion.query(nombreTrabajo, function(error, lista){
+    if(error){
+        throw error;
+    }else{
+        console.log(lista);
+    }
+});
+
+
 conexion.end();
