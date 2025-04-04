@@ -6,7 +6,8 @@ Manejara peticiones a la base de datos, diferentes tablas de precios, pacientes,
 consultorios y a su vez servira para administrar las ganancias del laboratorio y
 gastos de materiales, contando con una agenda de trabajos activos, saldo pendiente,
 saldo cobrado y capital invertido.
-
+___
+![Imagen portada](https://media.istockphoto.com/id/1202232185/es/vector/proceso-de-impresi%C3%B3n-3d-m%C3%A9dica-de-pr%C3%B3tesis-dentales.jpg?s=612x612&w=0&k=20&c=rXaMQbw0fFl3S09jH54AfWVSx4LYeBxqTuA_msBiSSw=)
 ## Funciones
 ### Parametos basicos a considerar:
 
