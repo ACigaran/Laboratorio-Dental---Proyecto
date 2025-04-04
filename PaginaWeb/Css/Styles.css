@@ -3,8 +3,9 @@ html {
 }
 
 body{
-    font-size: 16px;
+    background-image: url("../Imagenes/TexturaFondo.png");
     background-color: #F48FB1;
+    font-size: 16px;
 }
 
 article {
@@ -36,6 +37,8 @@ article:hover {
 }
 
 button {
+    border-color: whitesmoke;
+    transition: box-shadow 0.3s ease;
     background-color: #FCE4EC;
     box-shadow: inset -5px -5px 10px #F8BBD0;
     display: block;
@@ -55,6 +58,7 @@ button:hover {
 
 button:active {
     background-color: #F48FB1;
+    box-shadow: 5px 8px 8px rgba(34, 34, 34, 0.658);
 }
 
 .loginButton {
@@ -98,5 +102,17 @@ button:active {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-top: 0%;
+    }
+}
+
+@media (max-width: 390px) {
+    .textos{
+        font-size: 1.2em;
+    }
+    .textoP {
+        font-size: 0.7em;
+    }
+    button {
+        font-size: 1.5em;
     }
 }

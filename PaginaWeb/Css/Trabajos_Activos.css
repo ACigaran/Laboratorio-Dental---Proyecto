@@ -1,0 +1,164 @@
+html {
+    font-family: "verdana", cursive;
+}
+
+body {
+    background-color: #c8e6c9;
+    align-content: center;
+    text-align: center;
+    font-size: 16px;
+}
+
+table {
+    background-image: url("../Imagenes/Olas_Fondo.png");
+    background-color: #F06292;
+    border-radius: 2vh;
+    margin-top: 10%;
+    margin: 0 auto;
+    padding: 8px;
+}
+
+thead {
+    background-color: #F06292;
+}
+
+tbody:active{
+    background-color: #f48fb1;
+}
+
+/* BOTONES */
+
+.todosLosTrabajos {
+    font-family: "Playwrite IT Moderna", cursive;
+    font-size: 1.4em;
+    margin: 2px;
+    width: 35vh;
+}
+
+.agregarTrabajo {
+    font-family: "Playwrite IT Moderna", cursive;
+    font-size: 1em;
+    padding: 5px;
+    margin: 2px;
+    width: 93%;
+}
+
+.botonesFooter {
+    font-family: "Playwrite IT Moderna", cursive;
+    font-size: 1.2em;
+    padding: 5px;
+    width: 20vh;
+}
+
+button {
+    transition: box-shadow 0.3s ease;
+    background-color: #E1F2F1;
+    border-color: whitesmoke;
+    border-radius: 5px;
+}
+
+button:active {
+    box-shadow: 2px 2px 5px rgba(34, 34, 34, 0.658);
+    background-color: #80CBC4;
+}
+
+/* CONTENEDORES DIV SECTION FOOTER */
+
+.ingresarNuevos {
+    background-image: url("../Imagenes/Olas_Fondo.png");
+    background-color: skyblue;
+    border-radius: 2vh;
+    margin: 4% auto;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+section {
+    margin: 2vh;
+}
+
+footer {
+    /* flex-direction: column; */
+    align-items: center;
+    /* align-content: center; */
+    /* display: flex; */
+}
+
+/* CONTENIDO DIV */
+
+input, select {
+    flex-direction: column;
+    font-size: 1em;
+    margin: 1px;
+    width: 90%;
+}
+
+select {
+    height: 3vh;
+    width: 93%;
+}
+
+@media (min-width: 760px) {
+    h2 {
+        text-shadow: 3px 3px 5px black;
+        color: #80CBC4;
+        font-size: 3em;
+    }
+    table {
+        width: 100%;
+        height: 35vh;
+        font-size: 1.8em;
+    }
+    .todosLosTrabajos {
+        font-size: 2.5em;
+        margin: 2% auto;
+        width: 35vh;
+        height: 8vh;
+    }
+    .ingresarNuevos {
+        margin: 0 auto;
+        font-size: 1.8em;
+        padding: 1px;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    input, select {
+        border-radius: 1vh;
+        font-size: 1.5em;
+        padding: 6px;
+        width: 91.5%;
+        margin: 1px;
+    }
+    select {
+        height: 65px;
+        width: 93%;
+    }
+    .agregarTrabajo {
+        font-size: 1.5em;
+        padding: 3px;
+        margin: 8px;
+    }
+    .botonesFooter {
+        margin: 5px auto;
+        font-size: 2em;
+    }
+    h4 {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 1000px) {
+    table{
+        font-size: 2em;
+        height: 50vh;
+    }
+    .botonesFooter {
+        font-size: 3em;
+        width: 50vh;
+    }
+    .todosLosTrabajos {
+        font-size: 3em;
+        width: 50vh;
+        height: 15vh;
+    }
+}

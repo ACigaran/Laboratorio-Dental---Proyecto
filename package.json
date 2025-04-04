@@ -2,7 +2,7 @@
   "name": "laboratorio-dental---proyecto",
   "version": "1.0.0",
   "description": "Crear un programa en c# que se adapte a un dispositivo movil,\r debera funcionar como una base de datos de los pacientes totales del\r consultorio, administrador de saldos ($$$) del laboratorio, y ser una\r agenda sobre trabajos activos y finalizados.",
-  "main": "./PaginaWeb/HTml/Index.html",
+  "main": "./PaginaWeb/Index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/ACigaran/Laboratorio-Dental---Proyecto#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
     "mysql": "^2.18.1"
   }
 }

@@ -1,0 +1,85 @@
+html {
+    font-family: "verdana", cursive;
+}
+
+body {
+    background-color: #D1C4E9;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20%;
+}
+
+h4 {
+    font-family: "Boldonse", system-ui;
+    font-size: 1.4em;
+    margin: 4%;
+}
+
+div {
+    background-image: url("../Imagenes/Olas_Fondo.png");
+    background-color: #f76292;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+table {
+    background-color: #d48db1;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin: auto;
+    padding: 5px;
+    width: 95%;
+}
+
+thead {
+    background-color: #f76292;
+    border-radius: 5px;
+}
+
+tbody:active{
+    background-color: #f8bbd0;
+}
+
+footer {
+    background-image: url("../Imagenes/Olas_Fondo.png");
+    background-color: #ec407a;
+    flex-direction: column;
+    margin-bottom: 35%;
+    border-radius: 5px;
+    margin-top: 5%;
+    display: flex;
+    padding: 5px;
+}
+
+input {
+    border-radius: 5px;
+}
+
+.contenidoFooter {
+    font-family: "Playwrite IT Moderna", cursive;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 8px;
+    margin: 2px;
+}
+
+.botonesPagina {
+    font-family: "Playwrite IT Moderna", cursive;
+    flex-direction: column;
+    margin-bottom: 2.5%;
+    font-size: 2em;
+    padding: 8px;
+    width: 25vh;
+}
+
+button {
+    transition: box-shadow 0.3s ease;
+    background-color: #f8bbd0;
+    border-color: whitesmoke;
+    border-radius: 5px;
+}
+
+button:active {
+    box-shadow: 2px 2px 5px rgba(34, 34, 34, 0.658);
+    background-color: #f48fb1;
+}

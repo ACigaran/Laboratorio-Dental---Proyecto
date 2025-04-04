@@ -64,15 +64,21 @@ input {
 }
 
 button {
+    border-color: whitesmoke;
+    transition: box-shadow 0.3s ease;
     width: 40%;
     height: 5vh;
     font-size: 1.5em;
     border-radius: 10px;
     cursor: pointer;
-    /* margin-top: 1%; */
     margin: 1%;
     background-color: #C8E6C9;
     box-shadow: inset -5px -5px 10px #A5D6A7;
+}
+
+button:active {
+    background-color: #80CBC4;
+    box-shadow: 5px 8px 8px rgba(34, 34, 34, 0.658);
 }
 
 @media (min-width: 720px) {

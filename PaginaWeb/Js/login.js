@@ -9,7 +9,7 @@ function comprobarLogin() {
     if (user == inptuser.value && contra == inptcontra.value) {
         console.log('Usuario y contraseña correcta\nBienvenido');
         localStorage.setItem('usuario', 'logeado');
-        window.location.href="../HTml/Index.html"
+        window.location.href="../../PaginaWeb/Index.html"
     } else {
         alert("¡Credenciales incorrectas!");
     }

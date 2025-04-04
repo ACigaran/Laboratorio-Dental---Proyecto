@@ -28,6 +28,8 @@ input, button {
 }
 
 button {
+    border-color: whitesmoke;
+    transition: box-shadow 0.3s ease;
     background-color: #E0F7FA;
     box-shadow: inset -5px -5px 10px #B2EBF2;
 } 
@@ -42,6 +44,11 @@ div:hover {
 
 button:hover {
     cursor: pointer;
+}
+
+button:active {
+    background-color: #80CBC4;
+    box-shadow: 5px 8px 8px rgba(34, 34, 34, 0.658);
 }
 
 @media (min-width: 720px) {
