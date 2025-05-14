@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabajos Activos y Asignación</title> 
+    <link rel="stylesheet" href="/Css/Trabajos_Activos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        .status-mensaje { margin-top: 5px; font-size: 0.9em; }
+        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .form-section label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-section select, .form-section input[type="number"], .form-section input[type="checkbox"] {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: calc(100% - 18px);
+        }
+        .form-section .extras-container div { margin-bottom: 8px; }
+        .form-section .extras-container input[type="checkbox"] + label { font-weight: normal; margin-left: 5px; }
+        .form-section .precio-calculado strong { display: block; margin-top:10px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px;}
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left;}
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <% if (typeof error !== 'undefined' && error && error.pageLoad) { %>
+        <p style="color: red; text-align: center;"><%= error.pageLoad %></p>
+    <% } %>
+    <div>
+        <h2>TRABAJOS ACTIVOS DE PACIENTES</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>PACIENTE</th>
+                    <th>TRABAJO ASIGNADO</th>
+                    <th>DETALLES EXTRA</th>
+                    <th>PRECIO FINAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof pacientesConTrabajos !== 'undefined' && pacientesConTrabajos.length > 0) { %>
+                    <% pacientesConTrabajos.forEach(function(trabajo) { %>
+                        <tr>
+                            <td><%= trabajo.NombreEntidad %> <%= trabajo.ApellidoEntidad %></td>
+                            <td><%= trabajo.NombreTrabajo %></td>
+                            <td>
+                                <% if (trabajo.extras_ganchos_cantidad && trabajo.extras_ganchos_cantidad > 0) { %>
+                                    Ganchos: <%= trabajo.extras_ganchos_cantidad %><br>
+                                <% } %>
+                                <% if (trabajo.extras_dientes_cantidad && trabajo.extras_dientes_cantidad > 0) { %>
+                                    Dientes: <%= trabajo.extras_dientes_cantidad %><br>
+                                <% } %>
+                                <% if (trabajo.extras_cromo_con_dientes) { %>
+                                    Cromo c/Dientes<br>
+                                <% } %>
+                            </td>
+                            <td>
+                            <% let precioNum = Number(trabajo.precio_final_asignado); %>
+                            $<%= (trabajo.precio_final_asignado != null && !isNaN(precioNum)) ? precioNum.toFixed(2) : 'N/A' %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %> <%# Simplificado el else if (!error) a solo else %>
+                    <tr>
+                        <td colspan="4">No hay trabajos activos de pacientes.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>TRABAJOS ACTIVOS DE CONSULTORIOS</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>CONSULTORIO</th>
+                    <th>TRABAJO ASIGNADO</th>
+                    <th>DETALLES EXTRA</th>
+                    <th>PRECIO FINAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof consultoriosConTrabajos !== 'undefined' && consultoriosConTrabajos.length > 0) { %>
+                    <% consultoriosConTrabajos.forEach(function(trabajo) { %>
+                        <tr>
+                            <td><%= trabajo.NombreEntidad %></td>
+                            <td><%= trabajo.NombreTrabajo %></td>
+                            <td>
+                                <% if (trabajo.extras_ganchos_cantidad && trabajo.extras_ganchos_cantidad > 0) { %>
+                                    Ganchos: <%= trabajo.extras_ganchos_cantidad %><br>
+                                <% } %>
+                                <% if (trabajo.extras_dientes_cantidad && trabajo.extras_dientes_cantidad > 0) { %>
+                                    Dientes: <%= trabajo.extras_dientes_cantidad %><br>
+                                <% } %>
+                                <% if (trabajo.extras_cromo_con_dientes) { %>
+                                    Cromo c/Dientes<br>
+                                <% } %>
+                            </td>
+                            <td>
+                            <% let precioConsultorio = Number(trabajo.precio_final_asignado); %>
+                            $<%= (trabajo.precio_final_asignado != null && !isNaN(precioConsultorio)) ? precioConsultorio.toFixed(2) : 'N/A' %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No hay trabajos activos de consultorios.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="ingresarNuevos">
+        <section class="form-section">
+            <h4>ASIGNAR NUEVO TRABAJO A PACIENTE</h4>
+            <form id="formAsignarPaciente">
+                <label for="pacienteSelect">Paciente:</label>
+                <select id="pacienteSelect" name="pacienteId" required>
+                    <option value="">Seleccione un paciente...</option>
+                    <% if (typeof listaPacientes !== 'undefined' && listaPacientes.length > 0) { %>
+                        <% listaPacientes.forEach(function(p) { %>
+                            <option value="<%= p.id %>"><%= p.Nombre %> <%= p.Apellido %></option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="" disabled>No hay pacientes para seleccionar</option>
+                    <% } %>
+                </select>
+                <label for="trabajoPacienteSelect">Trabajo de Paciente:</label>
+                <select id="trabajoPacienteSelect" name="trabajoId" required>
+                    <option value="">Seleccione un trabajo...</option>
+                    <% if (typeof listaTrabajosPacientes !== 'undefined' && listaTrabajosPacientes.length > 0) { %>
+                        <% listaTrabajosPacientes.forEach(function(tp) { %>
+                            <option value="<%= tp.id %>"
+                                    data-precio-base="<%= tp.PrecioContado %>"
+                                    data-precio-mp="<%= tp.PrecioMercadoLibre %>" <%# Asegúrate que PrecioMercadoLibre venga de la consulta %>
+                                    data-nombre-trabajo="<%= tp.Nombre %>">
+                                <%= tp.Nombre %>
+                            </option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="" disabled>No hay tipos de trabajo de paciente</option>
+                    <% } %>
+                </select>
+                <div id="extrasPacienteContainer" class="extras-container" style="margin-top: 10px;">
+                    <div id="cantidadGanchosPacienteDiv" style="display:none;">
+                        <label for="cantidadGanchosPaciente">Cantidad Ganchos Extra:</label>
+                        <input type="number" id="cantidadGanchosPaciente" name="cantidadGanchos" min="0" value="0">
+                        <span id="costoGanchoPaciente"></span>
+                    </div>
+                    <div id="cantidadDientesPacienteDiv" style="display:none;">
+                        <label for="cantidadDientesPaciente">Cantidad Dientes Extra:</label>
+                        <input type="number" id="cantidadDientesPaciente" name="cantidadDientes" min="0" value="0">
+                        <span id="costoDientePaciente"></span>
+                    </div>
+                    <div id="conDientesCromoPacienteDiv" style="display:none;">
+                        <input type="checkbox" id="conDientesCromoPaciente" name="conDientesCromo" style="width:auto; margin-right: 5px;">
+                        <label for="conDientesCromoPaciente">Incluir Dientes (+300)</label>
+                    </div>
+                </div>
+                <div class="precio-calculado">
+                    <strong>Precio Contado Calculado: $<span id="precioCalculadoContadoPaciente">0.00</span></strong>
+                    <strong>Precio MP Calculado: $<span id="precioCalculadoMPPaciente">0.00</span></strong>
+                </div>
+                <button type="submit" class="agregarTrabajo">Asignar Trabajo</button>
+            </form>
+            <p id="statusAsignarPaciente" class="status-mensaje"></p>
+        </section>
+        <section class="form-section">
+            <h4>ASIGNAR NUEVO TRABAJO A CONSULTORIO</h4>
+            <form id="formAsignarConsultorio">
+                <label for="consultorioSelect">Consultorio:</label>
+                <select id="consultorioSelect" name="consultorioId" required>
+                    <option value="">Seleccione un consultorio...</option>
+                    <% if (typeof listaConsultorios !== 'undefined' && listaConsultorios.length > 0) { %>
+                        <% listaConsultorios.forEach(function(c) { %>
+                            <option value="<%= c.id %>"><%= c.Nombre %></option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="" disabled>No hay consultorios para seleccionar</option>
+                    <% } %>
+                </select>
+                <label for="trabajoConsultorioSelect">Trabajo de Consultorio:</label>
+                <select id="trabajoConsultorioSelect" name="trabajoId" required>
+                    <option value="">Seleccione un trabajo...</option>
+                    <% if (typeof listaTrabajosConsultorios !== 'undefined' && listaTrabajosConsultorios.length > 0) { %>
+                        <% listaTrabajosConsultorios.forEach(function(tc) { %>
+                            <option value="<%= tc.id %>"
+                                    data-precio-base="<%= tc.PrecioContado %>"
+                                    data-nombre-trabajo="<%= tc.Nombre %>">
+                                <%= tc.Nombre %>
+                            </option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="" disabled>No hay tipos de trabajo de consultorio</option>
+                    <% } %>
+                </select>
+                <div id="extrasConsultorioContainer" class="extras-container" style="margin-top: 10px;">
+                    <div id="cantidadGanchosConsultorioDiv" style="display:none;">
+                        <label for="cantidadGanchosConsultorio">Cantidad Ganchos Extra:</label>
+                        <input type="number" id="cantidadGanchosConsultorio" name="cantidadGanchos" min="0" value="0">
+                        <span id="costoGanchoConsultorio"></span>
+                    </div>
+                    <div id="cantidadDientesConsultorioDiv" style="display:none;">
+                        <label for="cantidadDientesConsultorio">Cantidad Dientes Extra:</label>
+                        <input type="number" id="cantidadDientesConsultorio" name="cantidadDientes" min="0" value="0">
+                        <span id="costoDienteConsultorio"></span>
+                    </div>
+                    <div id="conDientesCromoConsultorioDiv" style="display:none;">
+                        <input type="checkbox" id="conDientesCromoConsultorio" name="conDientesCromo" style="width:auto; margin-right: 5px;">
+                        <label for="conDientesCromoConsultorio">Incluir Dientes (+300)</label>
+                    </div>
+                </div>
+                <div class="precio-calculado">
+                    <strong>Precio Contado Calculado: $<span id="precioCalculadoContadoConsultorio">0.00</span></strong>
+                </div>
+                <button type="submit" class="agregarTrabajo">Asignar Trabajo</button>
+            </form>
+            <p id="statusAsignarConsultorio" class="status-mensaje"></p>
+        </section>
+    </div>
+    <footer>
+        <a href="/"><button class="botonesFooter">Regresar</button></a>
+        <a href="/trabajos-activos"><button class="botonesFooter">Recargar</button></a>
+    </footer>
+    <script src="/Js/trabajos_activos.js"></script>
+</body>
+</html>

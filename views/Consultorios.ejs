@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultorios</title>
+    <link rel="stylesheet" href="/Css/Pacientes_Consultorios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>CONSULTORIOS</h1>
+    <div>
+        <h2>Listado de Consultorios</h2>
+        <% if (typeof error !== 'undefined' && error) { %><p style="color: red;"><%= error %></p><% } %>
+        <table>
+            <thead>
+                <tr>
+                    <th> Consultorio </th>
+                    <th> Dirección </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof consultorios !== 'undefined' && consultorios.length > 0) { %>
+                    <%# Iterar sobre cada consultorio pasado desde el servidor %>
+                    <% consultorios.forEach(function(consultorio) { %>
+                        <tr>
+                            <td><%= consultorio.Nombre %></td>
+                            <td><%= consultorio.Direccion %></td>
+                        </tr>
+                    <% }); %>
+                <% } else if (!error) { %>
+                    <%# Mensaje si no hay consultorios y no hubo error al cargar %>
+                    <tr>
+                        <td colspan="2">No hay consultorios registrados o no se pudieron cargar.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Agregar Nuevo Consultorio</h2>
+        <form class="inputs" action="/api/consultorios/validar" method="post">
+            <input type="text" name="nomb" id="nomb" placeholder="Nombre" required>
+            <input type="text" name="dir" id="dir" placeholder="Direccion" required> 
+            <button type="submit">Agregar consultorio</button>
+        </form>
+    </div>
+    <footer>
+        <a href="/"><button class="regresar">Regresar</button></a>
+    </footer>
+</body>
+</html>
