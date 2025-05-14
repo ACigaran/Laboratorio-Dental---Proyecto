@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Css/Pacientes_Consultorios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>PACIENTES</h1>
+    <div>
+        <h2>Últimos Pacientes Registrados</h2>
+        <% if (typeof error !== 'undefined' && error) { %><p style="color: red;"><%= error %></p><% } %>
+        <table>
+            <thead>
+                <tr>
+                    <th> Nombre </th>
+                    <th> Apellido </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof pacientes !== 'undefined' && pacientes.length > 0) { %>
+                    <% pacientes.forEach(function(paciente) { %>
+                        <tr>
+                            <td><%= paciente.Nombre %></td>
+                            <td><%= paciente.Apellido %></td>
+                        </tr>
+                    <% }); %>
+                <% } else if (!error) { %>
+                    <tr>
+                        <td colspan="2">No hay pacientes registrados recientemente.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Agregar Nuevo Paciente</h2>
+        <form action="/api/pacientes/validar" method="post">
+            <input type="text" name="nomb" id="nomb" placeholder="Nombre" required>        
+            <input type="text" name="apell" id="apell" placeholder="Apellido" required>        
+            <button type="submit" value="agregar">Agregar nuevo paciente</button>
+        </form>
+    </div>
+    <footer>
+        <a href="/"><button class="regresar">Regresar</button></a>
+    </footer>
+</body>
+</html>

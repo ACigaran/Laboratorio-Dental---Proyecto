@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Mensual</title>
+    <link rel="stylesheet" href="/Css/BalanceMensual.css">
+    <style> 
+        .fila-totales th { font-weight: bold; background-color: #f0f0f0; text-align: right; padding-right: 10px; }
+        .fila-totales th:first-child { text-align: left; }
+        .acciones-pago input[type="number"] { width: 80px; margin-right: 5px; padding: 5px; }
+        .acciones-pago button { padding: 5px 10px; }
+        .status-mensaje-fila { font-size: 0.8em; margin-left: 10px; display: inline-block; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px;}
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left;}
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>BALANCE MENSUAL (TRABAJOS PENDIENTES DE ENTREGA Y COBRO)</h3>
+        <% if (typeof error !== 'undefined' && error) { %><p style="color: red; text-align: center;"><%= error %></p><% } %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente/Consultorio y Trabajo</th>
+                    <th>Precio Total</th>
+                    <th>Cobrado</th>
+                    <th>Faltante</th>
+                    <th>Registrar Pago</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof trabajosParaBalance !== 'undefined' && trabajosParaBalance.length > 0) { %>
+                    <% trabajosParaBalance.forEach(function(trabajo) { %>
+                        <tr id="fila-trabajo-<%= trabajo.tipoEntidad.toLowerCase() %>-<%= trabajo.idParaActualizar %>">
+                            <td>
+                                <strong><%= trabajo.nombreCompleto %> (<%= trabajo.tipoEntidad %>)</strong><br>
+                                <small><%= trabajo.nombreTrabajo %></small>
+                            </td>
+                            <td class="precio-total">$<%= trabajo.precio != null ? trabajo.precio.toFixed(2) : '0.00' %></td>
+                            <td class="monto-cobrado">$<%= trabajo.cobrado != null ? trabajo.cobrado.toFixed(2) : '0.00' %></td>
+                            <td class="monto-faltante">$<%= trabajo.faltante != null ? trabajo.faltante.toFixed(2) : '0.00' %></td>
+                            <td class="acciones-pago">
+                                <%# ID del input de pago ahora incluye tipoEntidad para asegurar unicidad %>
+                                <input type="number" step="0.01" min="0" placeholder="Monto" id="pago-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>">
+                                <button onclick="registrarPago('<%= trabajo.tipoEntidad %>', '<%= trabajo.idParaActualizar %>', document.getElementById('pago-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>').value)">Pagar</button>
+                                <span class="status-mensaje-fila" id="status-pago-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>"></span>
+                            </td>
+                            <td>
+                                <button onclick="marcarComoEntregado('<%= trabajo.tipoEntidad %>', '<%= trabajo.idParaActualizar %>')">Entregado</button>
+                                <span class="status-mensaje-fila" id="status-entrega-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>"></span>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else if (!error) { %>
+                    <tr><td colspan="6" style="text-align: center;">No hay trabajos pendientes para mostrar en el balance.</td></tr>
+                <% } %>
+            </tbody>
+            <tfoot>
+                <tr class="fila-totales">
+                    <th>Total General Pendiente:</th>
+                    <th>$<%= (typeof totalEstimado !== 'undefined' && totalEstimado != null ? totalEstimado.toFixed(2) : '0.00') %></th>
+                    <th>$<%= (typeof totalCobrado !== 'undefined' && totalCobrado != null ? totalCobrado.toFixed(2) : '0.00') %></th>
+                    <th>$<%= (typeof totalFaltante !== 'undefined' && totalFaltante != null ? totalFaltante.toFixed(2) : '0.00') %></th>
+                    <th colspan="2"></th> 
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <br>
+    <a href="/"><button>Regresar</button></a>
+    <script src="/Js/balance_mensual.js"></script>
+</body>
+</html>

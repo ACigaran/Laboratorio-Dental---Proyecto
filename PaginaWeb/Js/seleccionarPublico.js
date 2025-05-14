@@ -1,7 +1,7 @@
 function pacientes() {
-    window.location.href="../SeleccionarLista/TrabajosPacientes/TrabajosPacient.html"
+    window.location.href="/precios"
 }
 
 function consultorios() {
-    window.location.href="../SeleccionarLista/TrabajosConsultorios/TrabajosConsult.html"
+    window.location.href="/precios-consultorios"
 }

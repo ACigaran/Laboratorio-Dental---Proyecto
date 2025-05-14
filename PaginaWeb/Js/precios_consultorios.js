@@ -1,37 +1,31 @@
-function guardarCambiosPrecios() {
-    const form = document.getElementById('preciosForm');
+function guardarCambiosPreciosConsultorios() {
+    const form = document.getElementById('preciosConsultoriosForm');
     const inputs = form.querySelectorAll('input[type="number"][data-id]');
-    const statusMensaje = document.getElementById('statusMensaje');
+    const statusMensaje = document.getElementById('statusMensajeConsultorios');
     statusMensaje.textContent = 'Guardando...';
     statusMensaje.style.color = 'black';
 
     const preciosParaEnviar = [];
-    const idsProcesados = new Set();
 
-    inputs.forEach(input => {
+    for (const input of inputs) {
         const id = input.dataset.id;
-        if (!idsProcesados.has(id)) {
-            const inputContado = form.querySelector(`input[data-id="${id}"][data-field="PrecioContado"]`);
-            const inputMercadoLibre = form.querySelector(`input[data-id="${id}"][data-field="PrecioMercadolibre"]`);
+        const field = input.dataset.field; 
+        if (field === 'PrecioContado') {
             const precioData = {
                 id: parseInt(id, 10),
-                precioContado: inputContado ? inputContado.value : null,
-                precioMercadoLibre: inputMercadoLibre ? inputMercadoLibre.value : null
+                precioContado: input.value 
             };
             if (precioData.precioContado === '' || precioData.precioContado === null) {
                 statusMensaje.textContent = `Error: El precio contado para el trabajo con ID ${id} no puede estar vacío.`;
                 statusMensaje.style.color = 'red';
+                setTimeout(() => { statusMensaje.textContent = ''; }, 5000);
+                return;
             }
             preciosParaEnviar.push(precioData);
-            idsProcesados.add(id);
         }
-    });
-    if (statusMensaje.style.color === 'red') {
-        console.log("Envío cancelado debido a errores de validación en cliente.");
-        setTimeout(() => { statusMensaje.textContent = ''; }, 5000);
-        return; 
     }
-    fetch('/api/precios/actualizar', {
+
+    fetch('/api/precios-consultorios/actualizar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +38,7 @@ function guardarCambiosPrecios() {
                 throw new Error(errData.message || `Error del servidor: ${response.status}`);
             });
         }
-        return response.json(); 
+        return response.json();
     })
     .then(data => {
         if (data.success) {
@@ -57,7 +51,7 @@ function guardarCambiosPrecios() {
         setTimeout(() => { statusMensaje.textContent = ''; }, 5000);
     })
     .catch((error) => {
-        console.error('Error en fetch:', error);
+        console.error('Error en fetch (consultorios):', error);
         statusMensaje.textContent = `Error al guardar: ${error.message || 'Error de conexión.'}`;
         statusMensaje.style.color = 'red';
         setTimeout(() => { statusMensaje.textContent = ''; }, 5000);

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Precios Consultorios</title>
+    <link rel="stylesheet" href="/Css/Trabajos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        thead h2 {
+            margin: 15px 0 5px 0;
+            text-align: center;
+            background-color: #e9e9e9; 
+            padding: 8px;
+            font-size: 1.1em; 
+        }
+        th[colspan="2"] {
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>TRABAJOS Y PRECIOS PARA CONSULTORIOS</h1>
+    <% if (typeof error !== 'undefined' && error) { %><p style="color: red;"><%= error %></p><% } %>
+    <form id="preciosConsultoriosForm">
+        <table>
+            <%# Variable para rastrear el tipo de trabajo actual y agrupar %>
+            <% let currentTypeCons = ''; %>
+            <% if (typeof trabajos !== 'undefined' && trabajos.length > 0) { %>
+                <% trabajos.forEach(function(trabajo) { %>
+                    <% if (trabajo.Tipo !== currentTypeCons) { %>
+                        <%# Si no es la primera sección, cierra el 'tbody' anterior %>
+                        <% if (currentTypeCons !== '') { %>
+                            </tbody>
+                        <% } %>
+                        <%# Actualiza el tipo actual con el 'Tipo' del trabajo actual %>
+                        <% currentTypeCons = trabajo.Tipo; %>
+                        <%# Crea el encabezado de la nueva sección %>
+                        <thead>
+                            <tr>
+                                <%# Celda de encabezado que abarca 2 columnas para el título del Tipo %>
+                                <th class="nombre_trabajos" colspan="2"><h2><%= currentTypeCons.toUpperCase() %></h2></th>
+                            </tr>
+                            <tr>
+                                <th class="nombre_trabajos">Trabajo</th>
+                                <th class="nombre_trabajos">Precio Contado</th>
+                            </tr>
+                        </thead>
+                        <%# Abre un nuevo 'tbody' para las filas de esta sección %>
+                        <tbody>
+                    <% } %>
+                    <%# Crea la fila (tr) para el trabajo actual %>
+                    <tr>
+                        <%# Celda de encabezado de fila con el nombre del trabajo (usando 'Nombre') %>
+                        <th><%= trabajo.Nombre %></th>
+                        <%# Celda de datos con el input para el precio %>
+                        <td>
+                            <input
+                                type="number"
+                                step="0.01" <%# Permite precios con decimales %>
+                                <%# Nombre del input único (ej. precioContado_5) usando 'id' %>
+                                name="precioContado_<%= trabajo.id %>"
+                                <%# Valor inicial del input usando 'PrecioContado' %>
+                                value="<%= trabajo.PrecioContado %>"
+                                <%# Atributo data para almacenar el 'id' del trabajo %>
+                                data-id="<%= trabajo.id %>"
+                                <%# Atributo data para identificar qué campo es (útil en JS) %>
+                                data-field="PrecioContado"
+                            >
+                        </td>
+                    </tr>
+                <% }); %> <%# Fin del bucle forEach %>
+                <%# Cierra el último 'tbody' después de que termina el bucle %>
+                </tbody>
+            <% } else if (!error) { %>
+                <%# Mensaje alternativo si no hay trabajos y no hubo error al cargar %>
+                <tbody>
+                    <tr>
+                        <td colspan="2">No hay trabajos de consultorio registrados.</td>
+                    </tr>
+                </tbody>
+            <% } %>
+        </table>
+    </form>
+    <a href="/"><button type="button">Regresar</button></a>
+    <button type="button" onclick="guardarCambiosPreciosConsultorios()">Guardar Cambios</button>
+    <p id="statusMensajeConsultorios" style="margin-top: 10px;"></p>
+    <script src="/Js/precios_consultorios.js"></script>
+</body>
+</html>

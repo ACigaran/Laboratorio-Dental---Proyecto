@@ -3,11 +3,6 @@ let avisoCuadro = document.getElementById('cartelDeAviso');
 
 function irAlLogin() {
     if (usuarioIngresado !== null) {
-        // avisoCuadro.innerHTML = `
-        //     <div style="background-color: brown; width=80vh; height=80vh; position=absolute; z-index=1000; ">
-        //         <h1> !Usted ya esta logeado! </h1>
-        //     </div>
-        // `;
         alert("¡Usted ya se ingreso!");
     } else {
         window.location.href="./Rutas/Login.html"
@@ -17,7 +12,7 @@ function irAlLogin() {
 function deslogearse() {
     if (usuarioIngresado !== null) {
         localStorage.removeItem("usuario");
-        window.location.href="./Index.html"
+        window.location.href="/"
         alert('Usted se deslogeo exitosamente')
     } else {
         alert('Primero debe logearse');
@@ -34,7 +29,7 @@ function irListaTrabajos() {
 
 function irPacientes() {
     if (usuarioIngresado !== null) {
-        window.location.href="./Rutas/Pacientes.html";
+        window.location.href="/pacientes";
     } else {
         alert('SOLO USUARIOS PUEDEN ACCEDER')
     }
@@ -42,7 +37,7 @@ function irPacientes() {
 
 function irConsultorios() {
     if (usuarioIngresado !== null) {
-        window.location.href="./Rutas/Consultorios.html";
+        window.location.href="/consultorios";
     } else {
         alert('SOLO USUARIOS PUEDEN ACCEDER')
     }
@@ -50,7 +45,7 @@ function irConsultorios() {
 
 function irTrabajosActivos() {
     if (usuarioIngresado !== null) {
-        window.location.href="./Rutas/TrabajosActivos.html"    
+        window.location.href="/trabajos-activos"    
     } else {
         alert('SOLO USUARIOS PUEDEN ACCEDER')
     }
@@ -58,7 +53,7 @@ function irTrabajosActivos() {
 
 function irGastosMaterial() {
     if (usuarioIngresado !== null) {
-        window.location.href="./Rutas/GastosMaterial.html"
+        window.location.href="/gastos-material"
     } else {
         alert('SOLO USUARIOS PUEDEN ACCEDER')
     }
@@ -66,7 +61,7 @@ function irGastosMaterial() {
 
 function irBalanceMensual() {
     if (usuarioIngresado !== null) {
-        window.location.href="./Rutas/BalanceMensual.html"
+        window.location.href="/balance-mensual"
     } else {
         alert('SOLO USUARIOS PUEDEN ACCEDER')
     }

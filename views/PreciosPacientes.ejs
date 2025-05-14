@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Precios</title>
+    <link rel="stylesheet" href="/Css/Trabajos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>TRABAJOS Y PRECIOS</h1>
+    <% if (typeof error !== 'undefined' && error) { %><p style="color: red;"><%= error %></p><% } %>
+    <form id="preciosForm">
+        <table>
+            <% let currentType = ''; %>
+            <% if (typeof trabajos !== 'undefined' && trabajos.length > 0) { %>
+                <% trabajos.forEach(function(trabajo) { %>
+                    <%# Si el tipo cambia, empezamos nueva sección (usamos 'Tipo') %>
+                    <% if (trabajo.Tipo !== currentType) { %>
+                        <% if (currentType !== '') { %>
+                            </tbody>
+                        <% } %>
+                        <% currentType = trabajo.Tipo; %>
+                        <thead>
+                            <tr>
+                                <th class="nombre_trabajos" colspan="3"><h2><%= currentType.toUpperCase() %></h2></th>
+                            </tr>
+                            <tr>
+                                <th class="nombre_trabajos">Trabajo</th>
+                                <th class="nombre_trabajos">Precio Contado</th>
+                                <th class="nombre_trabajos">Mercado Libre</th> <%# Cambiado título %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <% } %>
+                    <%# Fila para cada trabajo (usamos 'Nombre', 'PrecioContado', 'PrecioMercadolibre', 'id') %>
+                    <tr>
+                        <th><%= trabajo.Nombre %></th>
+                        <td>
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="precioContado_<%= trabajo.id %>"
+                                value="<%= trabajo.PrecioContado %>"
+                                data-id="<%= trabajo.id %>"
+                                data-field="PrecioContado"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="precioMercadoLibre_<%= trabajo.id %>" <%# Nombre de input cambiado %>
+                                <%# Muestra vacío si es NULL o 0. Muestra el valor si es > 0. %>
+                                value="<%= (trabajo.PrecioMercadolibre !== null && trabajo.PrecioMercadolibre != 0) ? trabajo.PrecioMercadolibre : '' %>"
+                                placeholder="N/A"
+                                data-id="<%= trabajo.id %>"
+                                data-field="PrecioMercadolibre" <%# Data field cambiado %>
+                            >
+                        </td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            <% } else if (!error) { %>
+                <tbody>
+                    <tr>
+                        <td colspan="3">No hay trabajos registrados.</td>
+                    </tr>
+                </tbody>
+            <% } %>
+        </table>
+    </form>
+    <a href="/"><button type="button">Regresar</button></a>
+    <button type="button" onclick="guardarCambiosPrecios()">Guardar Cambios</button>
+    <p id="statusMensaje" style="margin-top: 10px;"></p>
+    <script src="/Js/logica_trabajo.js"></script>
+</body>
+</html>
