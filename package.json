@@ -4,7 +4,7 @@
   "description": "Crear un programa en c# que se adapte a un dispositivo movil,\r debera funcionar como una base de datos de los pacientes totales del\r consultorio, administrador de saldos ($$$) del laboratorio, y ser una\r agenda sobre trabajos activos y finalizados.",
   "main": "Index.js",
   "scripts": {
-    "start": "node Index.js"
+    "start": "node Index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,8 +24,5 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "mysql2": "^3.14.1"
-  }
-  "engines": {
-    "node": "18.x"
   }
 }
