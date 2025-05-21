@@ -2,7 +2,6 @@ require('dotenv').config();
 const mysql = require('mysql2/promise');
 
 let pool = null;
-let conexion;
 
 try {
     pool = mysql.createPool({
@@ -13,8 +12,21 @@ try {
         database: process.env.DB_NAME,
         port: process.env.DB_PORT || 3306,
         waitForConnections: true, 
-        queueLimit: 0 
+        queueLimit: 0,
+        ssl: {
+            // ca: fs.readFileSync(path.join(__dirname, 'certs', 'nombre_del_certificado_ca.pem')),
+            rejectUnauthorized: !(process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' || process.env.DB_SSL_REJECT_UNAUTHORIZED === '0')
+        }
     });
+    if (process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1' || process.env.NO_SSL === 'true') {
+        console.log("Conectando a DB local o NO_SSL=true, SSL deshabilitado para la conexión.");
+        delete dbConfig.ssl;
+    } else {
+        console.log("Configurando conexión DB con SSL. rejectUnauthorized:", dbConfig.ssl.rejectUnauthorized);
+    }
+
+    pool = mysql.createPool(dbConfig);
+    
     pool.getConnection()
         .then(connection => {
             console.log('¡Pool de conexiones DB conectado y listo!');
