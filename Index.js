@@ -15,15 +15,34 @@ const preciosConsultoriosApiRoutes = require('./routes/preciosconsultoriosApi.js
 const app = express();
 const PORT = process.env.PORT || 5500;
 
+const raizProyectoSupuesta = path.join(__dirname, '..');
+const paginaWebPathDesdeRaiz = path.join(raizProyectoSupuesta, "PaginaWeb");
+const indexPathDesdeRaiz = path.join(raizProyectoSupuesta, 'PaginaWeb', 'Rutas', 'Index.html');
+
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname, "PaginaWeb")));
+app.use(express.static(path.join(__dirname, '..', "PaginaWeb")));
 
 app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, 'PaginaWeb', 'Rutas', 'Index.html'));
+    const pathToIndex = path.join(__dirname, '..', 'PaginaWeb', 'Rutas', 'Index.html');
+     if (fs.existsSync(pathToIndex)) {
+        res.sendFile(pathToIndex);
+    } else {
+        console.error("Index.html NO ENCONTRADO en:", pathToIndex);
+        try {
+            const parentDirContent = fs.readdirSync(path.join(__dirname, '..'));
+            const paginaWebDirContent = fs.readdirSync(path.join(__dirname, '..', 'PaginaWeb'));
+            const rutasDirContent = fs.readdirSync(path.join(__dirname, '..', 'PaginaWeb', 'Rutas'));
+        } catch (e) {
+            console.error("Error listando directorios para depuración:", e.message);
+        }
+        res.status(404).send('Página principal no encontrada. Revisa los logs del servidor para la ruta correcta.');
+    }
 });
+    //res.sendFile(path.join(__dirname, 'PaginaWeb', 'Rutas', 'Index.html'));
+//});
 
 app.get("/pacientes", async function(req, res){ 
     const ultimosPacientesSql = 'SELECT id, Nombre, Apellido FROM Pacientes ORDER BY ID DESC LIMIT 6;'; 
