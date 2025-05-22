@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 let pool = null;
 
 try {
-    const configOptions = {
+    const configParaPool = {
         connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT) || 10,
         host: process.env.DB_HOST || 'localhost',
         user: process.env.DB_USER,
@@ -12,26 +12,25 @@ try {
         database: process.env.DB_NAME,
         port: parseInt(process.env.DB_PORT) || 3306,
         waitForConnections: true,
-        queueLimit: 0
+        queueLimit: 0,
+        ssl: {}
     };
-
+    
     const esConexionLocalOSinSSL = (
-        configOptions.host === 'localhost' ||
-        configOptions.host === '127.0.0.1' ||
+        configParaPool.host === 'localhost' ||
+        configParaPool.host === '127.0.0.1' ||
         process.env.NO_SSL === 'true'
     );
 
     if (!esConexionLocalOSinSSL) {
-        configOptions.ssl = {
-            rejectUnauthorized: !(process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' || process.env.DB_SSL_REJECT_UNAUTHORIZED === '0')
-            // ca: fs.readFileSync(path.join(__dirname, 'certs', 'nombre_del_certificado.pem'))
-        };
-        console.log("Configurando conexión DB con SSL. rejectUnauthorized:", configOptions.ssl.rejectUnauthorized);
+        configParaPool.ssl.rejectUnauthorized = !(process.env.DB_SSL_REJECT_UNAUTHORIZED === 'false' || process.env.DB_SSL_REJECT_UNAUTHORIZED === '0');
+        console.log("Configurando conexión DB remota con SSL. rejectUnauthorized:", configParaPool.ssl.rejectUnauthorized);
+        // Aquí iría la lógica para fs.readFileSync si Railway te da un archivo CA para conexiones públicas
     } else {
         console.log("Conexión DB sin SSL (local o NO_SSL=true).");
+        delete configParaPool.ssl;
     }
-
-    pool = mysql.createPool(configOptions);
+    pool = mysql.createPool(configParaPool);
     
     pool.getConnection()
         .then(connection => {
