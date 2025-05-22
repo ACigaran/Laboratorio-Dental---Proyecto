@@ -41,8 +41,8 @@ app.get("/", function(req, res){
             const paginaWebDirContent = fs.readdirSync(path.join(__dirname, 'PaginaWeb'));
             console.log(`Intentando listar contenido de ${paginaWebDirContent}:`);
             
-            if (fs.existsSync(paginaWebDirPath)) {
-                const paginaWebContent = fs.readdirSync(paginaWebDirPath);
+            if (fs.existsSync(paginaWebDirContent)) {
+                const paginaWebContent = fs.readdirSync(paginaWebDirContent);
                 console.log(`Contenido de ${paginaWebDirContent}:`, paginaWebContent);
                 const rutasDirContent = fs.readdirSync(path.join(__dirname, 'PaginaWeb', 'Rutas'));
                 console.log(`Intentando listar contenido de ${rutasDirContent}:`);
