@@ -24,10 +24,10 @@ app.set("view engine", "ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname, '..', "PaginaWeb")));
+app.use(express.static(path.join(__dirname, "PaginaWeb")));
 
 app.get("/", function(req, res){
-    const pathToIndex = path.join(__dirname, '..', 'PaginaWeb', 'Rutas', 'Index.html');
+    const pathToIndex = path.join(__dirname, 'PaginaWeb', 'Rutas', 'Index.html');
      if (fs.existsSync(pathToIndex)) {
         res.sendFile(pathToIndex);
     } else {
