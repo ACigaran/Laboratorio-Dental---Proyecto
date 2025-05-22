@@ -201,8 +201,8 @@ app.get("/trabajos-activos", async function(req, res){
     `;
     const sqlTodosPacientes = "SELECT id, Nombre, Apellido FROM Pacientes ORDER BY Apellido, Nombre;";
     const sqlTodosConsultorios = "SELECT id, Nombre FROM Consultorios ORDER BY Nombre;";
-    const sqlTodosTrabajosPacientes = "SELECT id, Nombre, PrecioContado, PrecioMercadoLibre FROM TrabajosPacientes ORDER BY Nombre;";
-    const sqlTodosTrabajosConsultorios = "SELECT id, Nombre, PrecioContado FROM TrabajosConsultorios ORDER BY Nombre;";
+    const sqlTodosTrabajosPacientes = "SELECT id, Nombre, Tipo, PrecioContado, PrecioMercadoLibre FROM TrabajosPacientes ORDER BY Tipo, Nombre;";
+    const sqlTodosTrabajosConsultorios = "SELECT id, Nombre, Tipo, PrecioContado FROM TrabajosConsultorios ORDER BY Tipo, Nombre;";
     if (!pool) { 
         console.error("Error: Pool de conexiones no está disponible para /pacientes.");
         return res.status(503).render('Pacientes', { pacientes: [], error: "Error de conexión DB."});
