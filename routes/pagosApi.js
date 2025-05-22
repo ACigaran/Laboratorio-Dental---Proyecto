@@ -3,37 +3,37 @@ const router = express.Router();
 const pool = require("../PaginaWeb/Datos/conexionBase.js");
 
 // Registrar pago para Paciente
-router.post("/paciente", async (req, res) => {
-    const { entidadId, montoPago } = req.body; // entidadId es el pacienteId
-    if (!entidadId || isNaN(parseFloat(montoPago)) || parseFloat(montoPago) <= 0) {
-        return res.status(400).json({ success: false, message: "Datos de pago inválidos." });
+router.post("/paciente-asignacion", async (req, res) => {
+    const { asignacionId, montoPago } = req.body;
+    if (!asignacionId || isNaN(parseFloat(montoPago)) || parseFloat(montoPago) <= 0) {
+        return res.status(400).json({ success: false, message: "ID de asignación y monto de pago válidos son requeridos." });
     }
     if (!pool) {
         console.error("Error: Pool de conexiones no está disponible para registrar pago paciente.");
         return res.status(503).json({error: "Error de conexión con la base de datos."});
     }
     try {
-        const [pacienteRows] = await pool.query( 
-            "SELECT monto_cobrado, precio_final_asignado FROM Pacientes WHERE id = ?",
-            [entidadId]
+        const [asignacionRows] = await pool.query(
+            "SELECT monto_cobrado, precio_final_asignado FROM PacientesTrabajosAsignados WHERE id = ?",
+            [asignacionId]
         );
-        if (pacienteRows.length === 0) {
-            return res.status(404).json({ success: false, message: "Paciente no encontrado." });
+        if (asignacionRows.length === 0) {
+            return res.status(404).json({ success: false, message: "Asignación de trabajo para paciente no encontrada." });
         }
-        const paciente = pacienteRows[0];
-        const montoCobradoActual = parseFloat(paciente.monto_cobrado) || 0;
-        const precioFinal = parseFloat(paciente.precio_final_asignado) || 0;
+        const asignacion = asignacionRows[0];
+        const montoCobradoActual = parseFloat(asignacion.monto_cobrado) || 0;
+        const precioFinal = parseFloat(asignacion.precio_final_asignado) || 0;
         const nuevoMontoCobrado = montoCobradoActual + parseFloat(montoPago);
-        if (nuevoMontoCobrado > precioFinal + 0.001) { 
-            return res.status(400).json({ success: false, message: `El monto del pago ($${parseFloat(montoPago).toFixed(2)}) excede el total adeudado ($${(precioFinal - montoCobradoActual).toFixed(2)}).` });
+        if (nuevoMontoCobrado > precioFinal + 0.001) {
+            return res.status(400).json({ success: false, message: `El monto del pago excede el total adeudado.` });
         }
-        await pool.query( 
-            "UPDATE Pacientes SET monto_cobrado = ? WHERE id = ?",
-            [nuevoMontoCobrado, entidadId]
+        await pool.query(
+            "UPDATE PacientesTrabajosAsignados SET monto_cobrado = ? WHERE id = ?",
+            [nuevoMontoCobrado, asignacionId]
         );
-        res.json({ success: true, message: "Pago registrado.", nuevoMontoCobrado: nuevoMontoCobrado, precioTotal: precioFinal });
+        res.json({ success: true, message: "Pago registrado para trabajo de paciente.", nuevoMontoCobrado: nuevoMontoCobrado, precioTotal: precioFinal });
     } catch (err) {
-        console.error("Error al registrar pago paciente:", err);
+        console.error("Error al registrar pago para trabajo de paciente:", err);
         res.status(500).json({ success: false, message: "Error interno del servidor al registrar pago." });
     }
 });

@@ -8,8 +8,8 @@ function registrarPago(tipoEntidad, idParaActualizar, montoIngresado) {
     let url = '';
     let body = {};
     if (tipoEntidad === 'Paciente') {
-        url = '/api/pagos/paciente';
-        body = { entidadId: idParaActualizar, montoPago: montoPago };
+        url = '/api/pagos/paciente-asignacion';
+        body = { asignacionId: idParaActualizar, montoPago: montoPago };
     } else if (tipoEntidad === 'Consultorio') {
         url = '/api/pagos/consultorio-asignacion';
         body = { asignacionId: idParaActualizar, montoPago: montoPago };

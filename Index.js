@@ -28,8 +28,8 @@ app.get("/", function(req, res){
     console.log('Valor de __dirname (en ruta /):', __dirname);
     console.log('Intentando servir Index.html desde:', pathToIndex);
     
-     if (fs.existsSync(pathToIndex)) {
-         console.log('Index.html ENCONTRADO en:', pathToIndex);
+    if (fs.existsSync(pathToIndex)) {
+        console.log('Index.html ENCONTRADO en:', pathToIndex);
         res.sendFile(pathToIndex);
     } else {
         console.error("Index.html NO ENCONTRADO en:", pathToIndex);
@@ -54,7 +54,7 @@ app.get("/", function(req, res){
                     console.log(`Directorio ${rutasDirContent} NO EXISTE`);
                 }
             } else {
-                 console.log(`Directorio ${paginaWebDirContent} NO EXISTE`);
+                console.log(`Directorio ${paginaWebDirContent} NO EXISTE`);
             }
         } catch (e) {
             console.error("Error listando directorios para depuración:", e.message);
@@ -159,23 +159,25 @@ app.get("/precios-consultorios", async function(req, res){
 app.get("/trabajos-activos", async function(req, res){
     const sqlPacientesActivos = `
         SELECT
+            pta.id AS AsignacionID,
             p.id AS EntidadID,
             p.Nombre AS NombreEntidad,
             p.Apellido AS ApellidoEntidad,
             'Paciente' AS TipoEntidad,
             tp.Nombre AS NombreTrabajo,
-            p.precio_final_asignado, /* Mostrar el precio final */
-            p.extras_ganchos_cantidad,
-            p.extras_dientes_cantidad,
-            p.extras_cromo_con_dientes
-            /* No necesitamos monto_cobrado aquí a menos que la tabla lo muestre explícitamente */
+            pta.precio_final_asignado,
+            pta.extras_ganchos_cantidad,
+            pta.extras_dientes_cantidad,
+            pta.extras_cromo_con_dientes
         FROM
-            Pacientes p
-        INNER JOIN
-            TrabajosPacientes tp ON p.TrabajosPacientes_id = tp.id
-        WHERE p.TrabajosPacientes_id IS NOT NULL AND p.trabajo_entregado = FALSE
+            PacientesTrabajosAsignados pta
+        JOIN
+            Pacientes p ON pta.paciente_id = p.id
+        JOIN
+            TrabajosPacientes tp ON pta.trabajo_paciente_id = tp.id
+        WHERE pta.trabajo_entregado = FALSE
         ORDER BY
-            p.id DESC;
+            pta.fecha_asignacion DESC, pta.id DESC;
     `;
     const sqlConsultoriosActivos = `
         SELECT
@@ -243,22 +245,23 @@ app.get("/trabajos-activos", async function(req, res){
 app.get("/balance-mensual", async function(req, res){
     const sqlPacientesBalance = `
         SELECT
-            p.id AS EntidadId, -- ID del Paciente
-            p.TrabajosPacientes_id AS TrabajoOriginalId, -- ID del tipo de trabajo
+            pta.id AS AsignacionId,
+            p.id AS EntidadId,
             p.Nombre AS NombreEntidad,
             p.Apellido AS ApellidoEntidad,
             tp.Nombre AS NombreTrabajo,
-            p.precio_final_asignado,
-            p.monto_cobrado
+            pta.precio_final_asignado,
+            pta.monto_cobrado
         FROM
-            Pacientes p
+            PacientesTrabajosAsignados pta
         INNER JOIN
-            TrabajosPacientes tp ON p.TrabajosPacientes_id = tp.id
+            Pacientes p ON pta.paciente_id = p.id
+        INNER JOIN
+            TrabajosPacientes tp ON pta.trabajo_paciente_id = tp.id
         WHERE
-            p.TrabajosPacientes_id IS NOT NULL AND
-            p.precio_final_asignado IS NOT NULL AND
-            p.precio_final_asignado > 0 AND
-            p.trabajo_entregado = FALSE; -- Solo los no entregados
+            pta.precio_final_asignado IS NOT NULL AND
+            pta.precio_final_asignado > 0 AND
+            pta.trabajo_entregado = FALSE;
     `;
     const sqlConsultoriosBalance = `
         SELECT
@@ -301,7 +304,7 @@ app.get("/balance-mensual", async function(req, res){
                 totalCobrado += montoCobrado;
                 totalFaltante += faltante;
                 todosLosTrabajos.push({
-                    idParaActualizar: tipoEntidad === 'Paciente' ? item.EntidadId : item.AsignacionId,
+                    idParaActualizar: item.AsignacionId,
                     nombreCompleto: tipoEntidad === 'Paciente' ? `${item.NombreEntidad} ${item.ApellidoEntidad}` : item.NombreEntidad,
                     nombreTrabajo: item.NombreTrabajo,
                     precio: precioAsignado,

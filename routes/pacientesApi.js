@@ -43,59 +43,66 @@ router.post("/asignar-trabajo", async function(req, res){
         extras_cromo_con_dientes,
         precio_final_asignado
     } = req.body;
+    if (!pacienteId || !trabajoId || precio_final_asignado === undefined || parseFloat(precio_final_asignado) <= 0) {
+        return res.status(400).json({ success: false, message: "Datos incompletos o precio final inválido para la asignación." });
+    }
     if (!pool) {
             console.error("Error: Pool de conexiones no disponible para asignar trabajo a paciente.");
             return res.status(503).json({success: false, message: "Error de conexión DB."});
     }
-    const sql = `UPDATE Pacientes SET
-                    TrabajosPacientes_id = ?,
-                    extras_ganchos_cantidad = ?,
-                    extras_dientes_cantidad = ?,
-                    extras_cromo_con_dientes = ?,
-                    precio_final_asignado = ?
-                WHERE id = ?`;
+    const sql = `INSERT INTO PacientesTrabajosAsignados
+                    (paciente_id, trabajo_paciente_id, extras_ganchos_cantidad, extras_dientes_cantidad, extras_cromo_con_dientes, precio_final_asignado, monto_cobrado, trabajo_entregado, fecha_asignacion)
+                    VALUES (?, ?, ?, ?, ?, ?, 0.00, FALSE, NOW())`;
     const params = [
+        pacienteId,
         trabajoId,
-        extras_ganchos_cantidad || 0, 
-        extras_dientes_cantidad || 0,
-        extras_cromo_con_dientes || false,
-        precio_final_asignado || null, 
-        pacienteId
+        parseInt(extras_ganchos_cantidad) || 0,
+        parseInt(extras_dientes_cantidad) || 0,
+        extras_cromo_con_dientes ? true : false,
+        parseFloat(precio_final_asignado)
     ];
     try {
-            const [result] = await pool.query(sql, params); 
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ success: false, message: "Paciente no encontrado." });
-            }
-            console.log(`Trabajo ID ${trabajoId} con extras asignado al paciente ID ${pacienteId}`);
-            res.json({ success: true, message: "Trabajo asignado al paciente correctamente con detalles." });
-        } catch (err) {
-            console.error("Error al asignar trabajo a paciente (con extras):", err);
-            return res.status(500).json({ success: false, message: "Error interno al asignar trabajo." });
-        }
-    });
+        const [result] = await pool.query(sql, params); 
+        console.log(`Nueva asignación de trabajo ID ${result.insertId} para paciente ID ${pacienteId}`);
+        res.status(201).json({ success: true, message: "Trabajo asignado al paciente correctamente.", asignacionId: result.insertId });
+    } catch (err) {
+        console.error("Error en API POST /pacientes/asignar-trabajo:", err);
+        return res.status(500).json({ success: false, message: "Error interno al asignar trabajo." });
+    }
+});
 
-router.put("/:id/marcar-entregado", async (req, res) => {
-    const pacienteId = req.params.id;
+    //         if (result.affectedRows === 0) {
+    //             return res.status(404).json({ success: false, message: "Paciente no encontrado." });
+    //         }
+    //         console.log(`Trabajo ID ${trabajoId} con extras asignado al paciente ID ${pacienteId}`);
+    //         res.json({ success: true, message: "Trabajo asignado al paciente correctamente con detalles." });
+    //     } catch (err) {
+    //         console.error("Error al asignar trabajo a paciente (con extras):", err);
+    //         return res.status(500).json({ success: false, message: "Error interno al asignar trabajo." });
+    //     }
+    // });
+
+router.put("/asignacion/:id/marcar-entregado", async (req, res) => {
+    const asignacionId = req.params.id;
     if (!pool) {
         console.error("Error: Pool de conexiones no está disponible para marcar entregado.");
         return res.status(503).json({error: "Error de conexión con la base de datos."});
     }
     try {
         const [result] = await pool.query(
-            "UPDATE Pacientes SET trabajo_entregado = TRUE WHERE id = ? AND trabajo_entregado = FALSE", 
-            [pacienteId]
+            "UPDATE PacientesTrabajosAsignados SET trabajo_entregado = TRUE WHERE id = ? AND trabajo_entregado = FALSE",
+            [asignacionId]
         );
         if (result.affectedRows === 0) {
-            const [pacienteRows] = await pool.query("SELECT id FROM Pacientes WHERE id = ?", [pacienteId]);
-            if (pacienteRows.length === 0) {
-                return res.status(404).json({ success: false, message: "Paciente no encontrado." });
+            const [asignacionRows] = await pool.query("SELECT id FROM PacientesTrabajosAsignados WHERE id = ?", [asignacionId]);
+            if (asignacionRows.length === 0) {
+                return res.status(404).json({ success: false, message: "Asignación de trabajo para paciente no encontrada." });
             }
-            return res.status(200).json({ success: true, message: "El trabajo del paciente ya estaba marcado como entregado o no requería actualización." });
+            return res.status(200).json({ success: true, message: "El trabajo del paciente ya estaba marcado como entregado." });
         }
         res.json({ success: true, message: "Trabajo del paciente marcado como entregado." });
     } catch (err) {
-        console.error("Error en API PUT /pacientes/:id/marcar-entregado:", err);
+        console.error("Error al marcar trabajo de paciente como entregado:", err);
         res.status(500).json({ success: false, message: "Error interno al marcar como entregado." });
     }
 });
