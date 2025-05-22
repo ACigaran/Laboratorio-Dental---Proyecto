@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, "PaginaWeb")));
 
 app.get("/", function(req, res){
-    const pathToIndex = path.join(__dirname, 'PaginaWeb', 'Rutas', 'Index.html');
+    const pathToIndex = path.join(__dirname, 'PaginaWeb', 'Index.html');
 
     console.log('Valor de __dirname (en ruta /):', __dirname);
     console.log('Intentando servir Index.html desde:', pathToIndex);
