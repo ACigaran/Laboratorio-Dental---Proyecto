@@ -49,7 +49,7 @@ function marcarComoEntregado(tipoEntidad, idParaActualizar) {
     const statusElement = document.getElementById(`status-entrega-${idParaActualizar}-${tipoEntidad.toLowerCase()}`);
     let url = '';
     if (tipoEntidad === 'Paciente') {
-        url = `/api/pacientes/${idParaActualizar}/marcar-entregado`;
+        url = `/api/pacientes/asignacion/${idParaActualizar}/marcar-entregado`;
     } else if (tipoEntidad === 'Consultorio') {
         url = `/api/consultorios/asignacion/${idParaActualizar}/marcar-entregado`;
     } else {
@@ -63,7 +63,26 @@ function marcarComoEntregado(tipoEntidad, idParaActualizar) {
         method: 'PUT', 
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
+    .then(response => { 
+        if (!response.ok) {
+            return response.text().then(text => { 
+                let errorMessage = `Error del servidor: ${response.status}`;
+                if (text) {
+                    const titleMatch = text.match(/<title>(.*?)<\/title>/i);
+                    const h1Match = text.match(/<h1>(.*?)<\/h1>/i);
+                    if (titleMatch && titleMatch[1]) {
+                        errorMessage += ` - ${titleMatch[1]}`;
+                    } else if (h1Match && h1Match[1]) {
+                        errorMessage += ` - ${h1Match[1]}`;
+                    } else {
+                        errorMessage += ` - ${text.substring(0, 150)}`;
+                    }
+                }
+                throw new Error(errorMessage);
+            });
+        }
+        return response.json(); // Solo parsea como JSON si la respuesta es OK (2xx)
+    })
     .then(data => {
         mostrarMensajeFila(statusElement, data.message, data.success ? 'green' : 'red');
         if (data.success) {
