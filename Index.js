@@ -16,10 +16,6 @@ const preciosConsultoriosApiRoutes = require('./routes/preciosconsultoriosApi.js
 const app = express();
 const PORT = process.env.PORT || 5500;
 
-const raizProyectoSupuesta = path.join(__dirname, '..');
-const paginaWebPathDesdeRaiz = path.join(raizProyectoSupuesta, "PaginaWeb");
-const indexPathDesdeRaiz = path.join(raizProyectoSupuesta, 'PaginaWeb', 'Rutas', 'Index.html');
-
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname, "views"));
 app.use(express.json());
@@ -28,14 +24,38 @@ app.use(express.static(path.join(__dirname, "PaginaWeb")));
 
 app.get("/", function(req, res){
     const pathToIndex = path.join(__dirname, 'PaginaWeb', 'Rutas', 'Index.html');
+
+    console.log('Valor de __dirname (en ruta /):', __dirname);
+    console.log('Intentando servir Index.html desde:', pathToIndex);
+    
      if (fs.existsSync(pathToIndex)) {
+         console.log('Index.html ENCONTRADO en:', pathToIndex);
         res.sendFile(pathToIndex);
     } else {
         console.error("Index.html NO ENCONTRADO en:", pathToIndex);
         try {
-            const parentDirContent = fs.readdirSync(path.join(__dirname, '..'));
-            const paginaWebDirContent = fs.readdirSync(path.join(__dirname, '..', 'PaginaWeb'));
-            const rutasDirContent = fs.readdirSync(path.join(__dirname, '..', 'PaginaWeb', 'Rutas'));
+            console.log(`Intentando listar contenido de ${__dirname}:`);
+            const parentDirContent = fs.readdirSync(path.join(__dirname));
+            console.log(`Contenido de ${__dirname}:`, parentDirContent);
+            
+            const paginaWebDirContent = fs.readdirSync(path.join(__dirname, 'PaginaWeb'));
+            console.log(`Intentando listar contenido de ${paginaWebDirContent}:`);
+            
+            if (fs.existsSync(paginaWebDirPath)) {
+                const paginaWebContent = fs.readdirSync(paginaWebDirPath);
+                console.log(`Contenido de ${paginaWebDirContent}:`, paginaWebContent);
+                const rutasDirContent = fs.readdirSync(path.join(__dirname, 'PaginaWeb', 'Rutas'));
+                console.log(`Intentando listar contenido de ${rutasDirContent}:`);
+                
+                if (fs.existsSync(rutasDirContent)) {
+                    const rutasContent = fs.readdirSync(rutasDirContent);
+                    console.log(`Contenido de ${rutasDirContent}:`, rutasContent);
+                } else {
+                    console.log(`Directorio ${rutasDirContent} NO EXISTE`);
+                }
+            } else {
+                 console.log(`Directorio ${paginaWebDirContent} NO EXISTE`);
+            }
         } catch (e) {
             console.error("Error listando directorios para depuración:", e.message);
         }
