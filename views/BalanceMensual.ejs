@@ -9,7 +9,8 @@
         .fila-totales th { font-weight: bold; background-color: #f0f0f0; text-align: right; padding-right: 10px; }
         .fila-totales th:first-child { text-align: left; }
         .acciones-pago input[type="number"] { width: 5vh; height: 3vh; padding: 5px; }
-        .acciones-pago button { padding: 5px 10px; width: 5vh; }
+        .acciones-pago button { width: 5vh; height: 3vh;}
+        .entregar-trabajo button { width: 5vh; height: 3vh;}
         .status-mensaje-fila { font-size: 0.8em; margin-left: 10px; display: inline-block; }
         table { width: 100%; padding: 0%; border-collapse: collapse; font-size: 0.6em;}
         th, td { border: 1px solid #ddd; padding: 5px; text-align: left;}
@@ -48,7 +49,7 @@
                                 <button onclick="registrarPago('<%= trabajo.tipoEntidad %>', '<%= trabajo.idParaActualizar %>', document.getElementById('pago-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>').value)">Pagar</button>
                                 <span class="status-mensaje-fila" id="status-pago-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>"></span>
                             </td>
-                            <td>
+                            <td class="entregar-trabajo">
                                 <button onclick="marcarComoEntregado('<%= trabajo.tipoEntidad %>', '<%= trabajo.idParaActualizar %>')">Entregado</button>
                                 <span class="status-mensaje-fila" id="status-entrega-<%= trabajo.idParaActualizar %>-<%= trabajo.tipoEntidad.toLowerCase() %>"></span>
                             </td>
