@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    background-image: url("../Imagenes/TexturaFondo.png");
     background-color: #c8e6c9;
     align-content: center;
     text-align: center;
@@ -52,6 +53,7 @@ tbody:active{
 
 button {
     transition: box-shadow 0.3s ease;
+    margin-top: 5px;
     background-color: #E1F2F1;
     border-color: whitesmoke;
     border-radius: 5px;
