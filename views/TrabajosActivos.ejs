@@ -8,12 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         .status-mensaje { margin-top: 5px; font-size: 0.9em; }
-        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .form-section { margin-bottom: 20px; padding: 15px; }
         .form-section label { display: block; margin-bottom: 5px; font-weight: bold; }
         .form-section select, .form-section input[type="number"], .form-section input[type="checkbox"] {
             margin-bottom: 10px;
@@ -36,7 +34,7 @@
         <p style="color: red; text-align: center;"><%= error.pageLoad %></p>
     <% } %>
     <div>
-        <h2>TRABAJOS ACTIVOS DE PACIENTES</h2>
+        <h2>TRABAJOS ACTIVOS PACIENTES</h2>
         <table>
             <thead>
                 <tr>
@@ -77,9 +75,9 @@
             </tbody>
         </table>
     </div>
-    <hr>
+    
     <div>
-        <h2>TRABAJOS ACTIVOS DE CONSULTORIOS</h2>
+        <h2>TRABAJOS ACTIVOS CONSULTORIOS</h2>
         <table>
             <thead>
                 <tr>
@@ -120,7 +118,7 @@
             </tbody>
         </table>
     </div>
-    <hr>
+    
     <div class="ingresarNuevos">
         <section class="form-section">
             <h4>ASIGNAR NUEVO TRABAJO A PACIENTE</h4>

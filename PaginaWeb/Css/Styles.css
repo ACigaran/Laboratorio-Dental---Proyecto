@@ -13,7 +13,7 @@ article {
     background-color: #F06292;
     transition: box-shadow 0.3s ease;
     width: 100%;
-    height: 100vh;
+    height: 97.5vh;
     text-align: center;
     padding: 2px;
     margin: 0 auto;
@@ -83,6 +83,14 @@ button:active {
 
 .textoP {
     font-size: 1em;
+}
+
+h3, h2, p {
+    margin: 0px;
+}
+
+.copy {
+    margin-top: 2em;
 }
 
 @media (min-width: 768px){
