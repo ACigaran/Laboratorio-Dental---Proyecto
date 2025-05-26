@@ -4,7 +4,7 @@ html {
 
 body {
     background-image: url("../Imagenes/TexturaFondo.png");
-    background-color: #c8e6c9;
+    background-color: #E1BEE7;
     align-content: center;
     text-align: center;
     font-size: 16px;
@@ -30,14 +30,14 @@ tbody:active{
 /* BOTONES */
 
 .todosLosTrabajos {
-    font-family: "Playwrite IT Moderna", cursive;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 1.4em;
     margin: 2px;
     width: 35vh;
 }
 
 .agregarTrabajo {
-    font-family: "Playwrite IT Moderna", cursive;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 1em;
     padding: 5px;
     margin: 2px;
@@ -45,7 +45,7 @@ tbody:active{
 }
 
 .botonesFooter {
-    font-family: "Playwrite IT Moderna", cursive;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 1.2em;
     padding: 5px;
     width: 20vh;
@@ -57,6 +57,7 @@ button {
     background-color: #E1F2F1;
     border-color: whitesmoke;
     border-radius: 5px;
+    font-family: "Bebas Neue", sans-serif;
 }
 
 button:active {
@@ -98,6 +99,14 @@ input, select {
 select {
     height: 3vh;
     width: 93%;
+}
+
+h2 {
+    font-family: "Boldonse", system-ui;
+    text-shadow: 2px 2px 2px black;
+    font-style: normal;
+    color: #B2DFDB;
+    font-size: 1.5em; 
 }
 
 @media (min-width: 760px) {

@@ -28,10 +28,6 @@ form {
     padding: 5px;
 }
 
-.inputs {
-    margin-top: 50px;
-}
-
 table {
     background-image: url("../Imagenes/Olas_Fondo.png");
     margin-bottom: 5px;
@@ -51,7 +47,7 @@ td:active {
 }
 
 button {
-    font-family: "Playwrite IT Moderna", cursive;
+    font-family: "Bebas Neue", sans-serif;
     transition: box-shadow 0.3s ease;
     background-color: #B2EBF2;
     border-color: whitesmoke;
@@ -82,7 +78,7 @@ input {
 }
 
 .regresar {
-    margin: 40% auto;
+    margin: 2em auto;
     font-size: 1.8em;
     width: 26vh;
     height: 8vh;

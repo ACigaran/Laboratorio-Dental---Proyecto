@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastos de Material</title>
     <link rel="stylesheet" href="/Css/GastosMaterial.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style> 
         table { font-size: 1em; width: 80%; margin: 20px auto; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -47,7 +50,7 @@
         </table>
     </div>
     <footer class="formulario-gasto">
-        <h5>Agregar Nuevo Gasto de Material</h5>
+        <h5>AGREGAR NUEVO GASTO</h5>
         <form id="formAgregarGasto">
             <input class="contenidoFooter" type="text" id="nombreMaterialInput" name="nombreMaterial" placeholder="Nombre material" required>
             <input class="contenidoFooter" type="number" id="precioMaterialInput" name="precioMaterial" step="0.01" min="0" placeholder="Precio" required>
@@ -55,10 +58,10 @@
         </form>
         <p id="statusAgregarGasto" class="status-mensaje"></p>
     </footer>
-    <div style="text-align: center; margin-top: 20px;">
+    <section style="text-align: center; margin-top: 20px;">
         <a href="/"><button class="botonesPagina">Regresar</button></a>
         <a href="/gastos-material"><button class="botonesPagina">Recargar</button></a>
-    </div>
+    </section>
     <script src="/Js/gastos_material.js"></script>
 </body>
 </html>
