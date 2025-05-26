@@ -1,5 +1,5 @@
 html {
-    font-family: "Playwrite IT Moderna", cursive;
+    font-family: "Pacifico", cursive;
 }
 
 body{
@@ -37,6 +37,7 @@ article:hover {
 }
 
 button {
+    font-family: "Bebas Neue", sans-serif;
     border-color: whitesmoke;
     transition: box-shadow 0.3s ease;
     background-color: #FCE4EC;
