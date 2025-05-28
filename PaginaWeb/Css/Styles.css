@@ -103,6 +103,9 @@ h3, h2, p {
     }
     .textos {
         font-size: 2.8em;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
     }
     .textoP {
         font-size: 2em;

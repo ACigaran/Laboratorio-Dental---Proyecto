@@ -3,7 +3,8 @@ html {
 }
 
 body {
-    background-color: #D1C4E9;
+    background-image: url("../Imagenes/TexturaFondo.png");
+    background-color: #b39ddb;
     text-align: center;
     font-size: 16px;
     margin: 0%;
