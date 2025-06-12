@@ -24,3 +24,6 @@ ___
 | Trabajos Activos | Conoce todos los pacientes con trabajos activos, en que fecha inicio el trabajo, el valor total del trabajo, cuanto dinero entrego y cuanto dinero falta para terminar el saldo |
 | Balance mensual | Total del dinero que ingreso al laboratorio en el mes, total del dinero faltante para terminar los trabajos, estimativo total en funcion de cuantos trabajos se realizaron en el mes |
 | Gasto mensual | Total del dinero que salio del laboratorio en el mes, cada x tiempo el laboratorio debe comprar materiales para trabajar, esas compras/gastos entran aqui |
+___
+## Resultado final del proyecto
+* https://maria-sonrisa-laboratorio-dental.onrender.com
